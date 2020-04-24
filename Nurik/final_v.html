@@ -1,0 +1,388 @@
+<html>
+<head>
+  <title>Project Work</title>
+</head>
+
+<style>
+    body {
+        background-color: oldlace;
+        user-select: none;
+        font-family: "Times New Roman";
+    }
+    button {
+        background-color: silver;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+    }
+    button:hover {
+        background-color: rgb(77, 0, 0);
+        color: white;
+    }
+</style>
+
+<body>
+ 
+<input id="operating_depth">        Operating Depth
+<br><br>
+<input id="wellbore_deviation">      Wellbore deviation
+<br><br>
+<input id="operating_temperature">      Operating Temperature
+<br><br>
+<input id="operating_volume">      Operating Volume 
+<br><br>
+<form name="form1">
+    <select name="CorHan" id="corrosion_handling">
+        <option value="na" ></option>
+        <option value="fr" >Fair</option>
+        <option value="gd">Good</option>
+        <option value="exlc">Excellent</option>
+    </select>       Corrosion Handling
+</form>
+<form name="form2">
+    <select name="SolHan" id="solids_handling">
+        <option value="na" ></option>
+        <option value="fr" >Fair</option>
+        <option value="pr" >Poor</option>
+        <option value="gd">Good</option>
+        <option value="exlc">Excellent</option>
+    </select>       Solids Handling
+</form>
+<input id="fluid_gravity">      Fluid Gravity
+<br><br>
+<form name="form3">
+    <select name="Ser" id="servicing">
+        <option value="na" ></option>
+        <option value="wko" >Workover</option>
+        <option value="plr" >Pulling Rig</option>
+        <option value="hdr" >Hydraulic</option>
+        <option value="wrl" >Wireline</option>
+        <option value="whcr">Welhead Catcher</option>
+    </select>       Servicing
+</form>
+<form name="form4">
+    <select name="PrMoTy" id="prime_mover_type">
+        <option value="na" ></option>
+        <option value="gsm" >Gas Motor</option>
+        <option value="elm" >Electric Motor</option>
+        <option value="mlc" >Multicylinder</option>
+        <option value="cmpr">Compressor</option>
+        <option value="wne" >Well's Natural Energy</option>
+    </select>       Prime Mover Type
+</form>
+<form name="form5">
+    <select name="OffApp" id="offshore_application">
+        <option value="na" ></option>
+        <option value="lmd">Limited</option>
+        <option value="gd" >Good</option>
+        <option value="exlc">Excellent</option>
+    </select>       Offshore Application
+</form>
+<input id="system_officiency">      System Efficiency
+<br><br>
+<form name="form6">
+    <select name="CapCos" id="capital_cost">
+        <option value="na" ></option>
+        <option value="low">Low</option>
+        <option value="mdr">Moderate</option>
+    </select>       Capital cost
+</form>
+<form name="form7">
+    <select name="OpCos" id="operating_cost">
+        <option value="na" ></option>
+        <option value="low">Low</option>
+        <option value="mdr">Moderate</option>
+        <option value="hg" >High</option>
+    </select>       Operating cost
+</form>
+
+<input type="button" onclick="execute()" value="Метод добычи нефти">
+
+<br><br>
+<div id="result"></div>
+ 
+<script>
+function execute() {
+    var RodPump = 0;
+    var rod_pump_f = 0;
+    var HydraulicPump = 0;
+    var hydraulic_pump_f = 0;
+    var ESP = 0;
+    var esp_f = 0;
+    var GasLift = 0;
+    var gas_lift_f = 0;
+    var PlungerLift = 0;
+    var plunger_lift_f = 0;
+    var PCP = 0;
+    var pcp_f = 0;
+
+    var operating_depth = parseInt(document.getElementById('operating_depth').value);
+    var wellbore_deviation = parseInt(document.getElementById('wellbore_deviation').value);
+    var operating_temperature = parseInt(document.getElementById('operating_temperature').value);
+    var operating_volume = parseInt(document.getElementById('operating_volume').value);
+    var corrosion_handling = document.getElementById('corrosion_handling').value;
+    var solids_handling = document.getElementById('solids_handling').value;
+    var fluid_gravity = parseInt(document.getElementById('fluid_gravity').value);
+    var servicing = document.getElementById('servicing').value;
+    var prime_mover_type = document.getElementById('prime_mover_type').value;
+    var offshore_application = document.getElementById('offshore_application').value;
+    var system_officiency = parseInt(document.getElementById('system_officiency').value);
+    var capital_cost = document.getElementById('capital_cost').value;
+    var operating_cost = document.getElementById('operating_cost').value;
+
+    if (operating_depth>=100 && operating_depth<=16000){
+        RodPump++;
+        rod_pump_f++;
+    } if (operating_depth>=7500 && operating_depth<=17000){
+        HydraulicPump++;
+        hydraulic_pump_f++;
+    } if (operating_depth>=1000 && operating_depth<=15000){
+        ESP++;
+        esp_f++;
+    } if (operating_depth>=5000 && operating_depth<=15000){
+        GasLift++;
+        gas_lift_f++;
+    } if (operating_depth>=8000 && operating_depth<=19000){
+        PlungerLift++;
+        plunger_lift_f++;
+    } if (operating_depth>=2000 && operating_depth<=6000){
+        PCP++;
+        pcp_f++;
+    }
+    
+    var a = wellbore_deviation;
+    if (a>=0 && a<=20){
+        RodPump++;
+        rod_pump_f++;
+        HydraulicPump++;
+        hydraulic_pump_f++;            
+    } if (a<=10){
+        ESP++;
+        esp_f++;
+    } if (a>=0 && a<=50){
+        GasLift++;
+        gas_lift_f++;
+    } if (a==10){
+        PCP++;
+        pcp_f++;
+    }
+
+    var a = operating_temperature;
+    if (a>=100 && a<=500){
+        RodPump++;
+        rod_pump_f++;
+        HydraulicPump++;
+        hydraulic_pump_f;
+    } if (a>=100 && a<=400){
+        ESP++;
+        esp_f++;
+        GasLift++;
+        gas_lift_f++;
+    } if (a>=130 && a<=500){
+        PlungerLift++;
+        plunger_lift_f++;
+    } if (a>=75 && a<=250){
+        PCP++;
+        pcp_f++;
+    }
+
+    var a = operating_volume;
+    if (a>=5 && a<=5000){
+        RodPump++;
+        rod_pump_f++;
+    } if (a>=50 && a<=4000){
+        HydraulicPump++;
+        hydraulic_pump_f++;
+    } if (a>=200 && a<=30000){
+        ESP++;
+        esp_f++;
+        GasLift++;
+        gas_lift_f++;
+    } if (a>=1 && a<=5){
+        PlungerLift++;
+        plunger_lift_f++;
+    } if (a>=5 && a<=4500){
+        PCP++;
+        pcp_f++;
+    }
+
+    var a = corrosion_handling;
+    if (a=="gd"){
+        RodPump++;
+        rod_pump_f++;
+        HydraulicPump++;
+        hydraulic_pump_f++;
+        ESP++;
+        esp_f++;
+        GasLift++;
+        gas_lift_f++;
+    } else if (a=="exlc"){
+        PlungerLift++;
+        plunger_lift_f++;
+    } else if (a=="fr"){
+        PCP++;
+        pcp_f++;
+    }
+
+    var a = solids_handling;
+    if (a=="pr"){
+        HydraulicPump++;
+        hydraulic_pump_f++;
+        ESP++;
+        esp_f++;
+    }else if (a=="gd"){
+        GasLift++;
+        gas_lift_f++;
+    }else if (a=="exlc"){
+        PCP++;
+        pcp_f++;
+    }else if (a=="fr"){
+        RodPump++;
+        rod_pump_f++;
+        PlungerLift++;
+        plunger_lift_f++;
+    }
+
+    var a = fluid_gravity;
+    if (a>8){
+        RodPump++;
+        rod_pump_f++;
+        HydraulicPump++;
+        hydraulic_pump_f++;
+    }if (a>10){
+        ESP++;
+        esp_f++;
+    }if (a>15){
+        GasLift++;
+        gas_lift_f++;
+        PlungerLift++;
+        plunger_lift_f++;
+    }if (a>35){
+        PCP++;
+        pcp_f++;
+    }
+
+    var a = servicing;
+    if (a=="wko" || a=="plr"){
+        RodPump++;
+        ESP++;
+        PCP++;
+        GasLift++;
+    } else if (a=="hdr"){
+        HydraulicPump++;
+    } else if (a=="wrl"){
+        GasLift++;
+        HydraulicPump++;
+        PlungerLift++;
+    } else if (a=="whcr"){
+        PlungerLift++;
+    }
+
+    var a = prime_mover_type;
+    if (a=="gsm"){
+        RodPump++;
+        PCP++;
+    } else if (a=="elm"){
+        RodPump++;
+        HydraulicPump++;
+        ESP++;
+        PCP++;
+    } else if (a=="mlc"){
+        HydraulicPump++;
+    } else if (a=="cmpr"){
+        GasLift++;
+    } else if (a=="wne"){
+        PlungerLift++;
+    }
+
+    var a = offshore_application;
+    if (a=="gd"){
+        HydraulicPump++;
+        PCP++;
+    } else if (a=="exlc"){
+        ESP++;
+        GasLift++;
+    } else if (a=="lmd"){
+        RodPump++;
+    }
+
+    var a = system_officiency;
+    if (a>=45 && a<=60){
+        RodPump++;
+    } if (a>=45 && a<=55){
+        HydraulicPump++;
+    } if (a>=35 && a<=60){
+        ESP++;
+    } if (a>=10 && a<=30){
+        GasLift++;
+    } if (a>=40 && a<=70){
+        PCP++;
+    }
+
+    var a = capital_cost;
+    if (a=="mdr"){
+        RodPump++;
+        HydraulicPump++;
+        ESP++;
+        GasLift++;
+        PlungerLift++;
+    } else if (a=="low"){
+        PCP++;
+    }
+    
+    var a = operating_cost;
+    if (a=="low"){
+        RodPump++;
+        GasLift++;
+        PlungerLift++;
+        PCP++;
+    }else if (a=="mdr"){
+        HydraulicPump++;
+    }else if (a=="hg"){
+        ESP++;
+    }
+
+
+    var max = 0;
+    var physmax = 0;
+    var variant = " ";
+
+    if (RodPump >= max && rod_pump_f >= physmax){
+        max = RodPump;
+        physmax = rod_pump_f;
+        variant = "RodPump";
+    } if (HydraulicPump >= max && hydraulic_pump_f >= physmax){
+        max = HydraulicPump;
+        physmax = hydraulic_pump_f;
+        variant = "HydraulicPump";
+    } if (ESP >= max && esp_f >= physmax){
+        max = ESP;
+        physmax = esp_f;
+        variant = "ESP";
+    } if (GasLift >= max && gas_lift_f >= physmax){
+        max = GasLift;
+        physmax = gas_lift_f;
+        variant = "GasLift";
+    } if (PlungerLift >= max && plunger_lift_f >= physmax){
+        max = PlungerLift;
+        physmax = plunger_lift_f;
+        variant = "PlungerLift";
+    } if (PCP >= max && pcp_f >= physmax){
+        max = PCP;
+        physmax = pcp_f;
+        variant = "PCP";
+    }
+
+    var output = 'Самый подходящий метод добычи нефти - ' + variant;
+    
+    alert(output);
+
+    output = output + '. Все значения(общий/физический/13): RodPump-' + RodPump + '/' + rod_pump_f + '/13 | HydraulicPump-' + HydraulicPump + '/' + hydraulic_pump_f + '/13 | ESP-' + ESP + '/' + esp_f + '/13 | GasLift-' + GasLift + '/' + gas_lift_f + '/13 | PlungerLift-' + PlungerLift + '/' + plunger_lift_f + '/13 | PCP-' + PCP + '/' + pcp_f + '/13';
+
+    document.getElementById('result').innerHTML = output;
+}
+
+</script>
+ 
+</body>
+</html>
